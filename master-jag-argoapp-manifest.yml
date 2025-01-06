@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jag-rbac-licensePlate
+  namespace: argocd-shared
+spec:
+  destination:
+    namespace: licensePlate-*
+    server: https://kubernetes.default.svc
+  project: jag
+  source:
+    repoURL: git@github.com:bcgov-c/ministry-gitops-jag.git
+    targetRevision: combined_repos
+    path: rbac_CLUSTER/licensePlate
+  syncPolicy:
+    automated:
+      selfHeal: true
